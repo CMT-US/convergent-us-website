@@ -19,7 +19,7 @@ export default function About() {
             </p>
             
             <p>
-              <strong>CMT-US's primary goals are twofold:</strong>
+              <strong>CMT-US&apos;s primary goals are twofold:</strong>
             </p>
             
             <p>
@@ -77,8 +77,8 @@ export default function About() {
                 <p>
                   Brian Coxon has an outstanding record of commercialization of science and technology 
                   in the aerospace industry. He received a B.S. in Aerospace Engineering from Iowa State 
-                  University and started his career with Boeing Commercial Airplane's Advanced Composite 
-                  Development Group as a Stress Engineer. He left Boeing to pursue his Master's Degree in 
+                  University and started his career with Boeing Commercial Airplane&apos;s Advanced Composite
+                  Development Group as a Stress Engineer. He left Boeing to pursue his Master&apos;s Degree in 
                   Chemical Engineering with a focus on composite process, structure, and property 
                   interactions on high temperature and thermoplastic composites.
                 </p>
@@ -88,7 +88,7 @@ export default function About() {
                   with a focus on advanced materials testing and manufacturing services. At Intec, 
                   Mr. Coxon grew the company to over 60 employees, focusing on advancing engineering knowledge, 
                   helping both materials suppliers and major OEM customers to design, analyze, and 
-                  productionize composite structures. As majority owner, Mr. Coxon negotiated Intec's 
+                  productionize composite structures. As majority owner, Mr. Coxon negotiated Intec&apos;s 
                   acquisition by LMI Aerospace in 2009 and stayed on as General Manager and later, 
                   Director of Innovation, Research, and Development.
                 </p>
@@ -97,12 +97,12 @@ export default function About() {
                   In 2012, Mr. Coxon was promoted to Executive Director of Innovation and Technology for LMI, 
                   reporting to the CEO. In this role, Mr. Coxon was charged with scaling and productionizing 
                   emergent technologies and development projects into the engineering, tooling, and 
-                  manufacturing production streams at LMI as well as managing the company's IP portfolio.
+                  manufacturing production streams at LMI as well as managing the company&apos;s IP portfolio.
                 </p>
                 
                 <p>
-                  In 2015, Mr. Coxon formed Convergent Manufacturing Technologies US Inc. (CMT-US), 
-                  a "C" Corporation, of which he is the majority owner and President. CMT-US is dedicated 
+                  In 2015, Mr. Coxon formed Convergent Manufacturing Technologies US Inc. (CMT-US),
+                  a &quot;C&quot; Corporation, of which he is the majority owner and President. CMT-US is dedicated 
                   to using the most advanced simulation tools available to reduce composite manufacturing 
                   costs, where he has led the several research efforts to advance composites process simulation.
                 </p>
@@ -136,7 +136,7 @@ export default function About() {
                 </p>
                 
                 <p>
-                  Curtis's background includes work in the fields of composite processing methods, 
+                  Curtis&apos;s background includes work in the fields of composite processing methods, 
                   materials characterization techniques, mechanical testing of composite structures 
                   and modeling of thermal profiles through composite structure during cure. Before 
                   joining CMT-US in 2016, Curtis completed his thesis studying thermal profiles in 
