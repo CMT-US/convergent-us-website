@@ -11,45 +11,18 @@ import ProcessIcon, {
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="bg-white">
-        <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
-                Advanced Composite Process Simulation
-              </h1>
-              <p className="mt-6 text-lg text-gray-600">
-                Convergent US provides services and tools to make composites manufacturing 
-                lower risk at every stage of the process using model-based simulation.
-              </p>
-              <div className="mt-8 flex flex-col sm:flex-row gap-4">
-                <Link
-                  href="/services"
-                  className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 transition-colors"
-                >
-                  Our Services
-                </Link>
-                <Link
-                  href="/contact"
-                  className="inline-flex items-center justify-center px-6 py-3 border border-blue-600 text-base font-medium rounded-md text-blue-600 bg-white hover:bg-blue-50 transition-colors"
-                >
-                  Get in Touch
-                </Link>
-              </div>
-            </div>
-            <div className="relative">
-              <Image
-                src="/images/hero-digital-twin.png"
-                alt="Person using computer with digital airplane model projected in background, highlighting digital twin technology and physics-based simulation for composite manufacturing."
-                width={1200}
-                height={674}
-                className="rounded-lg shadow-lg"
-                priority
-              />
-            </div>
-          </div>
+      <section className="relative w-full">
+        <div className="w-full">
+          <Image
+            src="/images/hero-digital-twin.png"
+            alt="Person using computer with digital airplane model projected in background, highlighting digital twin technology and physics-based simulation for composite manufacturing."
+            width={1920}
+            height={800}
+            className="w-full h-auto"
+            priority
+          />
         </div>
       </section>
 

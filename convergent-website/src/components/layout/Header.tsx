@@ -25,7 +25,7 @@ export default function Header() {
   ];
 
   return (
-    <header className="bg-white shadow-sm">
+    <header className="shadow-sm">
       <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 justify-between items-center">
           {/* Logo */}
@@ -36,7 +36,7 @@ export default function Header() {
                 alt="Convergent Manufacturing Technologies US"
                 width={300}
                 height={38}
-                className="h-8 w-auto"
+                className="h-12 w-auto"
                 priority
               />
             </Link>

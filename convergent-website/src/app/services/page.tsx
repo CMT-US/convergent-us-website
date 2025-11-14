@@ -2,9 +2,9 @@ import Link from 'next/link';
 
 export default function Services() {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen">
       {/* Header */}
-      <section className="bg-white py-16">
+      <section className="pt-16 pb-4">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
           <h1 className="text-4xl font-bold text-center text-gray-900 mb-8">
             Our Services

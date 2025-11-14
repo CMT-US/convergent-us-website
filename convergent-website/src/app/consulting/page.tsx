@@ -11,9 +11,9 @@ export default function Consulting() {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen">
       {/* Header */}
-      <section className="bg-white py-16">
+      <section className="pt-16 pb-0">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
           <h1 className="text-4xl font-bold text-center text-gray-900 mb-8">
             Consulting Services
@@ -22,7 +22,7 @@ export default function Consulting() {
       </section>
 
       {/* Typical Processes */}
-      <section className="py-16">
+      <section className="pt-8 pb-16">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
             Typical Processes

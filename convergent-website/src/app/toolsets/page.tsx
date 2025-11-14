@@ -3,9 +3,9 @@ import VideoPlayer from '@/components/ui/VideoPlayer';
 
 export default function Toolsets() {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen">
       {/* Header */}
-      <section className="bg-white py-16">
+      <section className="pt-16 pb-0">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
           <h1 className="text-4xl font-bold text-center text-gray-900 mb-8">
             Our Toolsets
@@ -14,7 +14,7 @@ export default function Toolsets() {
       </section>
 
       {/* Toolsets Content */}
-      <section className="py-16">
+      <section className="pt-8 pb-16">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
           <div className="bg-white rounded-lg shadow-sm p-8 mb-12">
             <h2 className="text-3xl font-bold text-gray-900 mb-6">
