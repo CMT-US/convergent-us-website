@@ -75,9 +75,9 @@ export default function Home() {
           </h2>
           <div className="prose prose-lg mx-auto text-center">
             <p className="text-gray-600">
-              Convergent Manufacturing Technologies US is a US owned and operated independent 
-              developer and reseller of hardware and software products using model-based simulation 
-              to design, optimize and trouble shoot advanced composite processes to improve 
+              Convergent Manufacturing Technologies US is a US owned and operated independent
+              developer and reseller of hardware and software products using model-based simulation
+              to design, optimize and trouble shoot advanced composite processes to improve
               manufacturing efficiency and lower risk at every stage of the process.
             </p>
             <div className="mt-8">
