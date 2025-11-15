@@ -6,6 +6,7 @@ import { schemaTypes } from './sanity/schemaTypes';
 export default defineConfig({
   name: 'default',
   title: 'Convergent Website',
+  basePath: '/studio',
 
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || '',
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
