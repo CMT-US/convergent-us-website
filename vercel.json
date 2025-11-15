@@ -1,0 +1,5 @@
+{
+  "buildCommand": "cd convergent-website && npm run build",
+  "outputDirectory": "convergent-website/.next",
+  "installCommand": "cd convergent-website && npm install"
+}
