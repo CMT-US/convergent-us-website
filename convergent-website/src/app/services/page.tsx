@@ -16,7 +16,7 @@ export default function Services() {
       </section>
 
       {/* Services Content */}
-      <section className="py-16">
+      <section className="py-20">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-1 gap-12">
             
@@ -99,7 +99,7 @@ export default function Services() {
       </section>
 
       {/* CTA Section */}
-      <section className="bg-blue-600 py-16">
+      <section className="bg-blue-600 py-20">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold text-white mb-4">
             Ready to Get Started?

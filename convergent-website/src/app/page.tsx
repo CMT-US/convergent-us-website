@@ -27,7 +27,7 @@ export default function Home() {
       </section>
 
       {/* Typical Processes Modeled Section */}
-      <section className="py-16">
+      <section className="py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
             Typical Processes Modeled
@@ -68,7 +68,7 @@ export default function Home() {
       </section>
 
       {/* About Us Section */}
-      <section className="bg-white py-16">
+      <section className="bg-white py-20">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-center text-gray-900 mb-8">
             About Us

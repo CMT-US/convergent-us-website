@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --background: #D3D3D3;
+  --background: #FAFAFA;
   --foreground: #171717;
 }
 
@@ -15,5 +15,25 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Color Palette
+ * Primary: convergent-blue (brand color)
+ * Headings: navy-700 (dark blue for hierarchy)
+ * Success: success-500, success-600 (green)
+ * Warning: warning-500, warning-600 (amber/orange)
+ * Error: error-500, error-600 (red)
+ * Background: #FAFAFA (subtle off-white)
+ */
+
+/* Typography Scale
+ * Headings: text-4xl (h1), text-3xl (h2), text-2xl (h3), text-xl (h4)
+ * Body: text-base, text-lg
+ * Small text: text-sm, text-xs
+ * Weights: font-normal (400), font-medium (500), font-semibold (600), font-bold (700)
+ */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  line-height: 1.2;
+  color: #0f172a;
 }

@@ -3,10 +3,12 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useState } from 'react';
+import { usePathname } from 'next/navigation';
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
+  const pathname = usePathname();
 
   const navigation = [
     {
@@ -25,7 +27,7 @@ export default function Header() {
   ];
 
   return (
-    <header className="shadow-sm">
+    <header className="sticky top-0 z-50 bg-white shadow-sm">
       <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 justify-between items-center">
           {/* Logo */}
@@ -53,7 +55,11 @@ export default function Header() {
                     onMouseEnter={() => setIsServicesOpen(true)}
                     onMouseLeave={() => setIsServicesOpen(false)}
                   >
-                    <button className="text-blue-600 hover:text-blue-800 px-3 py-2 text-sm font-medium transition-colors flex items-center">
+                    <button className={`px-3 py-2 text-sm font-medium transition-colors flex items-center ${
+                      pathname.startsWith('/services') || pathname.startsWith('/consulting')
+                        ? 'text-blue-800 font-semibold'
+                        : 'text-blue-600 hover:text-blue-800'
+                    }`}>
                       {item.name}
                       <svg className="ml-1 h-4 w-4" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
@@ -77,7 +83,11 @@ export default function Header() {
                   <Link
                     key={item.name}
                     href={item.href}
-                    className="text-blue-600 hover:text-blue-800 px-3 py-2 text-sm font-medium transition-colors"
+                    className={`px-3 py-2 text-sm font-medium transition-colors ${
+                      pathname === item.href
+                        ? 'text-blue-800 font-semibold'
+                        : 'text-blue-600 hover:text-blue-800'
+                    }`}
                   >
                     {item.name}
                   </Link>
@@ -118,14 +128,22 @@ export default function Header() {
               {navigation.map((item) => (
                 item.hasDropdown ? (
                   <div key={item.name}>
-                    <div className="text-blue-600 font-medium px-3 py-2 text-base">
+                    <div className={`font-medium px-3 py-2 text-base ${
+                      pathname.startsWith('/services') || pathname.startsWith('/consulting')
+                        ? 'text-blue-800 font-semibold'
+                        : 'text-blue-600'
+                    }`}>
                       {item.name}
                     </div>
                     {item.subItems?.map((subItem) => (
                       <Link
                         key={subItem.name}
                         href={subItem.href}
-                        className="text-blue-600 hover:text-blue-800 block pl-6 pr-3 py-2 text-base"
+                        className={`block pl-6 pr-3 py-2 text-base ${
+                          pathname === subItem.href
+                            ? 'text-blue-800 font-semibold'
+                            : 'text-blue-600 hover:text-blue-800'
+                        }`}
                         onClick={() => setIsMenuOpen(false)}
                       >
                         {subItem.name}
@@ -136,7 +154,11 @@ export default function Header() {
                   <Link
                     key={item.name}
                     href={item.href}
-                    className="text-blue-600 hover:text-blue-800 block px-3 py-2 text-base font-medium"
+                    className={`block px-3 py-2 text-base font-medium ${
+                      pathname === item.href
+                        ? 'text-blue-800 font-semibold'
+                        : 'text-blue-600 hover:text-blue-800'
+                    }`}
                     onClick={() => setIsMenuOpen(false)}
                   >
                     {item.name}

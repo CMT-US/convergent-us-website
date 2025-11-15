@@ -14,7 +14,7 @@ export default function Contact() {
       </section>
 
       {/* Contact Info & Form */}
-      <section className="py-16">
+      <section className="py-20">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
             
