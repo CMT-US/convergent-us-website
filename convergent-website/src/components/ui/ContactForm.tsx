@@ -41,7 +41,7 @@ export default function ContactForm() {
           message: result.error || 'Error submitting form. Please try again.',
         });
       }
-    } catch (error) {
+    } catch (_error) {
       setSubmitStatus({
         type: 'error',
         message: 'Network error. Please try again later.',
