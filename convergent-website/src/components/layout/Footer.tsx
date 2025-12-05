@@ -10,10 +10,10 @@ export default function Footer() {
           </h3>
           <div className="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-6 text-gray-600">
             <Link
-              href="mailto:info@convergent-mfg.com"
+              href="mailto:info@convergent-us.com"
               className="hover:text-blue-600 transition-colors"
             >
-              info@convergent-mfg.com
+              info@convergent-us.com
             </Link>
             <Link
               href="tel:+14253740302"
