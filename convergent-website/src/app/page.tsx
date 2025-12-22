@@ -13,22 +13,24 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative w-full">
-        <div className="w-full">
-          <Image
-            src="/images/hero-digital-twin.png"
-            alt="Person using computer with digital airplane model projected in background, highlighting digital twin technology and physics-based simulation for composite manufacturing."
-            width={1920}
-            height={800}
-            className="w-full h-auto"
-            priority
-          />
+      <section className="relative w-full bg-gray-50">
+        <div className="relative w-full">
+          <div className="relative aspect-[12/5] sm:aspect-[16/6] lg:aspect-[21/9] w-full">
+            <Image
+              src="/images/hero-digital-twin.png"
+              alt="Person using computer with digital airplane model projected in background, highlighting digital twin technology and physics-based simulation for composite manufacturing."
+              fill
+              priority
+              sizes="100vw"
+              className="object-scale-down"
+            />
+          </div>
         </div>
       </section>
 
       {/* Typical Processes Modeled Section */}
       <section className="py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl px-2 sm:px-4 lg:px-6">
           <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
             Typical Processes Modeled
           </h2>

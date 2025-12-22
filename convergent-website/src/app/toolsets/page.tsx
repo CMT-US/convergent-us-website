@@ -23,9 +23,12 @@ export default function Toolsets() {
             <div className="mb-6">
               <VideoPlayer src="/videos/osprey-demo.mp4" />
             </div>
-            <div className="text-gray-600">
-              <p className="text-lg font-semibold text-orange-600">
-                Content under development
+            <div className="text-gray-700 space-y-4">
+              <p>
+                OSPREY is a toolset currently in development at Convergent US for composite manufacturing simulation, design, and optimization. OSPREY is designed to be more accessible and easier to use for a typical M&amp;P engineer and features intuitive workflows, automatic meshing, and guided analysis.
+              </p>
+              <p>
+                Generic Shape Templates and parametric configuration models are used to capture workflow and parametrics that support optimization &amp; sensitivity analysis, integrations with test data, and automated training of AI surrogates to accelerate future real-time solutions.
               </p>
             </div>
           </div>

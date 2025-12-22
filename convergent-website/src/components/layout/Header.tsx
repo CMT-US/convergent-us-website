@@ -7,7 +7,7 @@ import { usePathname } from 'next/navigation';
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isServicesOpen, setIsServicesOpen] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const pathname = usePathname();
 
   const navigation = [
@@ -21,7 +21,16 @@ export default function Header() {
       ]
     },
     { name: 'Toolsets', href: '/toolsets' },
-    { name: 'Projects', href: '/projects' },
+    {
+      name: 'Projects',
+      href: '/projects',
+      hasDropdown: true,
+      subItems: [
+        { name: 'Research', href: '/projects/research' },
+        { name: 'Case Studies', href: '/projects/case-studies' },
+      ]
+    },
+    { name: 'Publications', href: '/publications' },
     { name: 'About', href: '/about' },
     { name: 'Contact', href: '/contact' },
   ];
@@ -52,11 +61,11 @@ export default function Header() {
                   <div
                     key={item.name}
                     className="relative"
-                    onMouseEnter={() => setIsServicesOpen(true)}
-                    onMouseLeave={() => setIsServicesOpen(false)}
+                    onMouseEnter={() => setOpenDropdown(item.name)}
+                    onMouseLeave={() => setOpenDropdown(null)}
                   >
                     <button className={`px-3 py-2 text-sm font-medium transition-colors flex items-center ${
-                      pathname.startsWith('/services') || pathname.startsWith('/consulting')
+                      pathname === item.href || pathname.startsWith(`${item.href}/`)
                         ? 'text-blue-800 font-semibold'
                         : 'text-blue-600 hover:text-blue-800'
                     }`}>
@@ -65,7 +74,7 @@ export default function Header() {
                         <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
                       </svg>
                     </button>
-                    {isServicesOpen && (
+                    {openDropdown === item.name && (
                       <div className="absolute left-0 mt-0 w-56 bg-white shadow-lg rounded-md border border-gray-200 z-50">
                         {item.subItems?.map((subItem) => (
                           <Link
@@ -129,7 +138,7 @@ export default function Header() {
                 item.hasDropdown ? (
                   <div key={item.name}>
                     <div className={`font-medium px-3 py-2 text-base ${
-                      pathname.startsWith('/services') || pathname.startsWith('/consulting')
+                      pathname === item.href || pathname.startsWith(`${item.href}/`)
                         ? 'text-blue-800 font-semibold'
                         : 'text-blue-600'
                     }`}>
