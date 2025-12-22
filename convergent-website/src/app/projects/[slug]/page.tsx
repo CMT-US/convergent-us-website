@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { PortableText } from 'next-sanity';
-import { client } from '@/lib/sanity/client';
+import { client, sanityEnabled } from '@/lib/sanity/client';
 import { projectBySlugQuery, projectsQuery } from '@/lib/sanity/queries';
 import { Project } from '@/lib/sanity/types';
 import { urlFor } from '@/lib/sanity/image';
@@ -19,6 +19,10 @@ const processLabels: Record<string, string> = {
 };
 
 async function getProject(slug: string): Promise<Project | null> {
+  if (!sanityEnabled || !client) {
+    return null;
+  }
+
   try {
     const project = await client.fetch<Project>(projectBySlugQuery, { slug });
     return project;
@@ -30,6 +34,10 @@ async function getProject(slug: string): Promise<Project | null> {
 
 // Generate static paths for all projects
 export async function generateStaticParams() {
+  if (!sanityEnabled || !client) {
+    return [];
+  }
+
   try {
     const projects = await client.fetch<Project[]>(projectsQuery);
     return projects.map((project) => ({

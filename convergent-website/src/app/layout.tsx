@@ -26,6 +26,11 @@ export default function RootLayout({
       <body className={`${inter.variable} font-sans antialiased`}>
         <div className="flex min-h-screen flex-col">
           <Header />
+          <div className="bg-yellow-50 border-b border-yellow-200 text-yellow-900">
+            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-2 text-sm text-center">
+              We are in the process of developing a new website experience; please bear with us as new content is developed.
+            </div>
+          </div>
           <main className="flex-1">
             {children}
           </main>

@@ -4,6 +4,13 @@ import { ContactSubmission } from '@/lib/sanity/types';
 
 export async function POST(request: Request) {
   try {
+    if (!client) {
+      return NextResponse.json(
+        { error: 'Contact form is temporarily unavailable. Please try again later.' },
+        { status: 503 }
+      );
+    }
+
     const data = await request.json();
 
     // Validate required fields

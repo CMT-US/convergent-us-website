@@ -34,9 +34,58 @@ export default function Consulting() {
                 <h3 className="text-xl font-semibold text-gray-900 mb-4">
                   {process.title}
                 </h3>
-                <p className="text-orange-600 font-medium">
-                  Under construction
-                </p>
+                {process.id === 'heatblanket' ? (
+                  <div className="space-y-6">
+                    <div>
+                      <h4 className="text-lg font-semibold text-gray-800 mb-2">Challenges</h4>
+                      <ul className="space-y-2 text-gray-700 list-disc pl-5">
+                        <li>Variable thicknesses and materials, complex geometries, and difficult environments.</li>
+                        <li>Uniform, spec-compliant cure zone temperatures during ramp and soak while respecting existing structure temperature limits.</li>
+                        <li>Control thermocouples are often remote proxies, requiring proxy process cycles.</li>
+                        <li>Small environmental, material, or blanket changes can significantly shift cure-zone temperatures.</li>
+                      </ul>
+                    </div>
+                    <div>
+                      <h4 className="text-lg font-semibold text-gray-800 mb-2">Process & Blanket Design Variables</h4>
+                      <ul className="space-y-2 text-gray-700 list-disc pl-5">
+                        <li>Control zone locations, watt density by zone, and zone region layout.</li>
+                        <li>Blanket manufacturing best practices and tolerances that influence design.</li>
+                        <li>Process cycle optimization, zone TC control points, and key monitoring locations.</li>
+                      </ul>
+                    </div>
+                  </div>
+                ) : process.id === 'autoclave' ? (
+                  <div className="space-y-4">
+                    <h4 className="text-lg font-semibold text-gray-800 mb-2">Challenges</h4>
+                    <ul className="space-y-2 text-gray-700 list-disc pl-5">
+                      <li>Thermal compliance of parts, particularly with large loads and variable environments.</li>
+                      <li>Distortion and geometric compliance: parts shrink and warp on tool.</li>
+                      <li>Porosity and other defects.</li>
+                    </ul>
+                  </div>
+                ) : process.id === 'infusion' ? (
+                  <div className="space-y-4">
+                    <h4 className="text-lg font-semibold text-gray-800 mb-2">Challenges</h4>
+                    <ul className="space-y-2 text-gray-700 list-disc pl-5">
+                      <li>Porosity.</li>
+                      <li>Dry spots from improper infusion.</li>
+                      <li>Distortion.</li>
+                    </ul>
+                  </div>
+                ) : process.id === 'weld' ? (
+                  <div className="space-y-4">
+                    <h4 className="text-lg font-semibold text-gray-800 mb-2">Challenges</h4>
+                    <ul className="space-y-2 text-gray-700 list-disc pl-5">
+                      <li>Developing compliant, robust processes that produce required bond strength.</li>
+                      <li>Minimizing geometric anomalies and distortion.</li>
+                      <li>Understanding sensitivities and process drivers.</li>
+                    </ul>
+                  </div>
+                ) : (
+                  <p className="text-orange-600 font-medium">
+                    Under construction
+                  </p>
+                )}
               </div>
             ))}
           </div>
