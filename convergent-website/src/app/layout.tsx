@@ -12,7 +12,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Convergent Manufacturing Technologies US",
+  title: "Convergent US",
   description: "Advanced composite process simulation services and tools to make composites manufacturing lower risk at every stage of the process.",
 };
 

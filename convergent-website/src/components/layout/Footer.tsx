@@ -6,7 +6,7 @@ export default function Footer() {
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="flex flex-col items-center space-y-4">
           <h3 className="text-lg font-semibold text-gray-900">
-            Convergent Manufacturing Technologies US
+            Convergent US
           </h3>
           <div className="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-6 text-gray-600">
             <Link
