@@ -1,4 +1,4 @@
-ho'use client';
+'use client';
 
 import Link from 'next/link';
 import Image from 'next/image';
@@ -44,7 +44,7 @@ export default function Header() {
             <Link href="/" className="flex items-center">
               <Image
                 src="/images/logo.png"
-                alt="Convergent US"
+                alt="Convergent Manufacturing Technologies US"
                 width={300}
                 height={38}
                 className="h-12 w-auto"
