@@ -1,5 +1,5 @@
 # UI/UX Design Recommendations
-**Convergent Manufacturing Technologies US Website**
+**Convergent US Website**
 
 ## Design System & Branding
 
