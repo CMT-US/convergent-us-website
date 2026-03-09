@@ -1,7 +1,7 @@
 # Sanity CMS Implementation Plan
 
 ## Overview
-This document outlines the plan to integrate Sanity CMS into the Convergent Manufacturing Technologies US website. The primary goals are:
+This document outlines the plan to integrate Sanity CMS into the Convergent US website. The primary goals are:
 1. **Projects Management**: Create and manage project case studies/portfolio items
 2. **Contact Form Submissions**: Store and manage feedback from the contact form
 

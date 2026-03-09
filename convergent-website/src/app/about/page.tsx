@@ -139,7 +139,7 @@ export default function About() {
                   Curtis&apos;s background includes work in the fields of composite processing methods, 
                   materials characterization techniques, mechanical testing of composite structures 
                   and modeling of thermal profiles through composite structure during cure. Before 
-                  joining CMT-US in 2016, Curtis completed his thesis studying thermal profiles in 
+                  joining Convergent US in 2016, Curtis completed his thesis studying thermal profiles in 
                   complex composite structures developed using novel tooling methods.
                 </p>
                 

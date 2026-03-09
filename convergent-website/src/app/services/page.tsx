@@ -88,7 +88,7 @@ export default function Services() {
                 </ul>
                 <p>
                   These activities support our customers in designing, analyzing, and optimizing 
-                  composite part manufacturing & repair using CMT-US tools, approaches, and workflows. 
+                  composite part manufacturing & repair using Convergent US tools, approaches, and workflows. 
                   They are generally project specific and proprietary.
                 </p>
               </div>

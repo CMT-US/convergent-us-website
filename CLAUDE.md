@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a Next.js 15 website for Convergent Manufacturing Technologies US, a company providing advanced composite process simulation services and tools. The project uses:
+This is a Next.js 15 website for Convergent US, a company providing advanced composite process simulation services and tools. The project uses:
 - **Next.js 15.5.2** with App Router and Turbopack
 - **React 19.1.0**
 - **TypeScript** with strict mode enabled
