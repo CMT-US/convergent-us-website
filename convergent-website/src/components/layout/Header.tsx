@@ -41,13 +41,14 @@ export default function Header() {
         <div className="flex h-16 justify-between items-center">
           {/* Logo */}
           <div className="flex items-center">
-            <Link href="/" className="flex items-center">
+            <Link href="/" className="flex items-center shrink-0">
               <Image
                 src="/images/logo.png"
-                alt="Convergent Manufacturing Technologies US"
+                alt="Convergent US"
                 width={300}
                 height={38}
-                className="h-12 w-auto"
+                className="h-10 w-auto shrink-0 object-contain sm:h-12 max-w-[60vw]"
+                sizes="(max-width: 640px) 60vw, 300px"
                 priority
               />
             </Link>
