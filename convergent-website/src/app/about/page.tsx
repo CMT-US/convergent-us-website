@@ -12,7 +12,7 @@ export default function About() {
           
           <div className="prose prose-lg mx-auto text-gray-600 space-y-6">
             <p>
-              Convergent US was founded in early 2015 by Brian Coxon 
+              Convergent US was founded in early 2015
               to provide digital manufacturing solutions for complex, high value composite parts to US customers. 
               Services include composites process simulation and consulting, materials characterization and 
               modeling, and research & development of hardware and software.

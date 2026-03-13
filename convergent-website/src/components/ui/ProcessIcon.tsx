@@ -12,9 +12,9 @@ export default function ProcessIcon({ title, href, icon, description }: ProcessI
   return (
     <Link
       href={href}
-      className="flex flex-col items-center p-6 text-center bg-white rounded-xl border border-gray-200 transition-all duration-300 group hover:shadow-xl hover:shadow-blue-500/20 hover:-translate-y-1 hover:border-blue-300"
+      className="flex flex-col items-center p-4 md:p-5 text-center bg-white rounded-xl border border-gray-200 transition-all duration-300 group hover:shadow-xl hover:shadow-blue-500/20 hover:-translate-y-1 hover:border-blue-300"
     >
-      <div className="mb-3 text-blue-600 group-hover:text-blue-700 transition-all duration-300 group-hover:scale-110">
+      <div className="mb-2 text-blue-600 group-hover:text-blue-700 transition-all duration-300 group-hover:scale-110">
         {icon}
       </div>
       <h3 className="text-sm font-semibold text-gray-900 group-hover:text-blue-700 transition-colors">
