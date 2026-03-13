@@ -22,19 +22,19 @@ export default function Home() {
               fill
               priority
               sizes="100vw"
-              className="object-scale-down"
+              className="object-contain"
             />
           </div>
         </div>
       </section>
 
       {/* Typical Processes Modeled Section */}
-      <section className="py-20">
+      <section className="pt-8 pb-10">
         <div className="mx-auto max-w-7xl px-2 sm:px-4 lg:px-6">
-          <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
+          <h2 className="text-3xl font-bold text-center text-gray-900 mb-8">
             Typical Processes Modeled
           </h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
             <ProcessIcon
               title="Heat Blanket"
               href="/consulting#heatblanket"

@@ -43,7 +43,7 @@ export default function Header() {
           <div className="flex items-center">
             <Link href="/" className="flex items-center shrink-0">
               <Image
-                src="/images/logo.png"
+                src="/images/logo.svg"
                 alt="Convergent US"
                 width={300}
                 height={38}
