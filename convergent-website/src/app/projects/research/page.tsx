@@ -1,5 +1,24 @@
 import Link from 'next/link';
-import PdfCarousel from '@/components/ui/PdfCarousel';
+import { client, sanityEnabled } from '@/lib/sanity/client';
+import { projectsQuery } from '@/lib/sanity/queries';
+import { Project } from '@/lib/sanity/types';
+import ProjectsGrid from '@/components/ui/ProjectsGrid';
+
+export const revalidate = 60; // Revalidate every 60 seconds
+
+async function getProjects(): Promise<Project[]> {
+  if (!sanityEnabled || !client) {
+    return [];
+  }
+
+  try {
+    const projects = await client.fetch<Project[]>(projectsQuery);
+    return projects;
+  } catch (error) {
+    console.error('Error fetching projects:', error);
+    return [];
+  }
+}
 
 const researchAreas = [
   'Prepreg tack modeling for AFP/ATL',
@@ -7,7 +26,9 @@ const researchAreas = [
   'Thermal profiling and cure cycle optimization',
 ];
 
-export default function ResearchPage() {
+export default async function ResearchPage() {
+  const projects = await getProjects();
+
   return (
     <div className="min-h-screen">
       <section className="bg-blue-600 text-white py-16">
@@ -60,7 +81,7 @@ export default function ResearchPage() {
       <section className="py-16 bg-gray-50">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <h2 className="text-2xl font-semibold text-gray-900 mb-6">Research Highlights</h2>
-          <PdfCarousel />
+          <ProjectsGrid projects={projects} />
         </div>
       </section>
     </div>
