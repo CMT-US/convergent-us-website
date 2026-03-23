@@ -145,7 +145,7 @@ export default function ProjectsGrid({ projects }: ProjectsGridProps) {
     selectedStatus !== 'all' ||
     selectedChallenges.length > 0;
 
-  const toggleMaterial = (value: string) => {
+  const toggleMaterial = (value: NonNullable<Project['material']>[number]) => {
     setSelectedMaterials((prev) =>
       prev.includes(value) ? prev.filter((material) => material !== value) : [...prev, value]
     );
