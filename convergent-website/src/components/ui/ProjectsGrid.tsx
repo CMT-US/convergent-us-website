@@ -36,15 +36,26 @@ const challengeLabels: Record<string, string> = {
 };
 
 const getLabel = (value: string, map: Record<string, string>) => map[value] || value;
-const getMaterialList = (material?: Project['material']) =>
-  Array.isArray(material) ? material : material ? [material] : [];
+const getMaterialList = (
+  material?: Project['material']
+): Array<NonNullable<Project['material']>[number]> => {
+  if (Array.isArray(material)) {
+    return material;
+  }
+  if (material) {
+    return [material as NonNullable<Project['material']>[number]];
+  }
+  return [];
+};
 
 type ProjectsGridProps = {
   projects: Project[];
 };
 
 export default function ProjectsGrid({ projects }: ProjectsGridProps) {
-  const [selectedMaterials, setSelectedMaterials] = useState<string[]>([]);
+  const [selectedMaterials, setSelectedMaterials] = useState<
+    Array<NonNullable<Project['material']>[number]>
+  >([]);
   const [selectedCustomer, setSelectedCustomer] = useState('all');
   const [selectedProcess, setSelectedProcess] = useState('all');
   const [selectedStatus, setSelectedStatus] = useState('all');
@@ -52,7 +63,11 @@ export default function ProjectsGrid({ projects }: ProjectsGridProps) {
 
   const options = useMemo(() => {
     const materials = Array.from(
-      new Set(projects.flatMap((project) => getMaterialList(project.material)))
+      new Set(
+        projects.flatMap(
+          (project) => getMaterialList(project.material)
+        )
+      )
     ).sort((a, b) => getLabel(a, materialLabels).localeCompare(getLabel(b, materialLabels)));
     const customers = Array.from(
       new Set(projects.map((project) => project.customer).filter(Boolean) as string[])
