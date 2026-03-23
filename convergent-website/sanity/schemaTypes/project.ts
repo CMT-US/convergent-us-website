@@ -22,8 +22,8 @@ export const project = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: 'client',
-      title: 'Client',
+      name: 'customer',
+      title: 'Customer',
       type: 'string',
     }),
     defineField({
@@ -52,6 +52,22 @@ export const project = defineType({
       type: 'string',
     }),
     defineField({
+      name: 'material',
+      title: 'Material',
+      type: 'array',
+      of: [{ type: 'string' }],
+      options: {
+        list: [
+          { title: 'Thermoset', value: 'thermoset' },
+          { title: 'Thermoplastic', value: 'thermoplastic' },
+          { title: 'BMI', value: 'bmi' },
+          { title: 'Carbon-Carbon', value: 'carbon-carbon' },
+          { title: 'Polyimide', value: 'polyimide' },
+        ],
+        layout: 'tags',
+      },
+    }),
+    defineField({
       name: 'process',
       title: 'Process',
       type: 'string',
@@ -67,9 +83,47 @@ export const project = defineType({
       },
     }),
     defineField({
+      name: 'status',
+      title: 'Status',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'Completed', value: 'completed' },
+          { title: 'In Progress', value: 'in-progress' },
+        ],
+      },
+      initialValue: 'in-progress',
+    }),
+    defineField({
       name: 'completedDate',
       title: 'Completed Date',
       type: 'date',
+      hidden: ({ document }) => document?.status !== 'completed',
+      validation: (Rule) =>
+        Rule.custom((value, context) => {
+          if (context.document?.status === 'completed' && !value) {
+            return 'Completed Date is required when status is Completed.';
+          }
+          return true;
+        }),
+    }),
+    defineField({
+      name: 'manufacturingChallenges',
+      title: 'Manufacturing Challenges',
+      type: 'array',
+      of: [{ type: 'string' }],
+      options: {
+        list: [
+          { title: 'Thermal Compliance', value: 'thermal-compliance' },
+          { title: 'Distortion', value: 'distortion' },
+          { title: 'Offgassing', value: 'offgassing' },
+          { title: 'Part Thickness', value: 'part-thickness' },
+          { title: 'Porosity', value: 'porosity' },
+          { title: 'Wrinkling', value: 'wrinkling' },
+          { title: 'Tool Compensation', value: 'tool-compensation' },
+        ],
+        layout: 'tags',
+      },
     }),
     defineField({
       name: 'content',
@@ -93,14 +147,14 @@ export const project = defineType({
   preview: {
     select: {
       title: 'title',
-      client: 'client',
+      customer: 'customer',
       media: 'mainImage',
     },
     prepare(selection) {
-      const { title, client } = selection;
+      const { title, customer } = selection;
       return {
         ...selection,
-        subtitle: client ? `Client: ${client}` : 'No client specified',
+        subtitle: customer ? `Customer: ${customer}` : 'No customer specified',
       };
     },
   },

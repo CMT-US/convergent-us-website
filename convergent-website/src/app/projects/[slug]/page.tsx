@@ -17,6 +17,26 @@ const processLabels: Record<string, string> = {
   'infusion': 'Infusion',
   'bonding': 'Bonding',
 };
+const materialLabels: Record<string, string> = {
+  'thermoset': 'Thermoset',
+  'thermoplastic': 'Thermoplastic',
+  'bmi': 'BMI',
+  'carbon-carbon': 'Carbon-Carbon',
+  'polyimide': 'Polyimide',
+};
+const statusLabels: Record<string, string> = {
+  'completed': 'Completed',
+  'in-progress': 'In Progress',
+};
+const challengeLabels: Record<string, string> = {
+  'thermal-compliance': 'Thermal Compliance',
+  'distortion': 'Distortion',
+  'offgassing': 'Offgassing',
+  'part-thickness': 'Part Thickness',
+  'porosity': 'Porosity',
+  'wrinkling': 'Wrinkling',
+  'tool-compensation': 'Tool Compensation',
+};
 
 async function getProject(slug: string): Promise<Project | null> {
   if (!sanityEnabled || !client) {
@@ -81,10 +101,18 @@ export default async function ProjectDetailPage({
 
           {/* Metadata */}
           <div className="flex flex-wrap gap-4 mb-8">
-            {project.client && (
+            {project.customer && (
               <div>
-                <span className="text-gray-500">Client: </span>
-                <span className="text-gray-900 font-medium">{project.client}</span>
+                <span className="text-gray-500">Customer: </span>
+                <span className="text-gray-900 font-medium">{project.customer}</span>
+              </div>
+            )}
+            {project.status && (
+              <div>
+                <span className="text-gray-500">Status: </span>
+                <span className="text-gray-900 font-medium">
+                  {statusLabels[project.status] || project.status}
+                </span>
               </div>
             )}
             {project.completedDate && (
@@ -98,18 +126,44 @@ export default async function ProjectDetailPage({
           </div>
 
           {/* Tags */}
-          <div className="flex flex-wrap gap-2 mb-8">
+          <div className="flex flex-wrap gap-2 mb-4">
             {project.process && (
               <span className="inline-block px-3 py-1 bg-blue-100 text-blue-700 text-sm rounded-full">
                 {processLabels[project.process] || project.process}
               </span>
             )}
+            {(Array.isArray(project.material)
+              ? project.material
+              : project.material
+                ? [project.material]
+                : []
+            ).map((material) => (
+              <span
+                key={material}
+                className="inline-block px-3 py-1 bg-emerald-100 text-emerald-700 text-sm rounded-full"
+              >
+                {materialLabels[material] || material}
+              </span>
+            ))}
             {project.industry && (
               <span className="inline-block px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full">
                 {project.industry}
               </span>
             )}
           </div>
+          {project.manufacturingChallenges &&
+            project.manufacturingChallenges.length > 0 && (
+              <div className="flex flex-wrap gap-2 mb-8">
+                {project.manufacturingChallenges.map((challenge) => (
+                  <span
+                    key={challenge}
+                    className="inline-block px-3 py-1 bg-orange-100 text-orange-700 text-sm rounded-full"
+                  >
+                    {challengeLabels[challenge] || challenge}
+                  </span>
+                ))}
+              </div>
+            )}
 
           {/* Main Image */}
           {project.mainImage && (
@@ -118,7 +172,7 @@ export default async function ProjectDetailPage({
                 src={urlFor(project.mainImage).width(1200).height(600).url()}
                 alt={project.title}
                 fill
-                className="object-cover"
+                className="object-contain"
                 priority
               />
             </div>
@@ -157,7 +211,7 @@ export default async function ProjectDetailPage({
                       src={urlFor(image).width(800).height(600).url()}
                       alt={`${project.title} - Image ${index + 1}`}
                       fill
-                      className="object-cover"
+                      className="object-contain"
                     />
                   </div>
                 ))}

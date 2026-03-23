@@ -7,13 +7,24 @@ export interface Project {
   slug: {
     current: string;
   };
-  client?: string;
+  customer?: string;
   description?: string;
   mainImage?: SanityImageSource;
   gallery?: SanityImageSource[];
   industry?: string;
+  material?: Array<'thermoset' | 'thermoplastic' | 'bmi' | 'carbon-carbon' | 'polyimide'>;
   process?: 'heat-blanket' | 'autoclave' | 'closed-mold' | 'afp' | 'infusion' | 'bonding';
+  status?: 'completed' | 'in-progress';
   completedDate?: string;
+  manufacturingChallenges?: Array<
+    | 'thermal-compliance'
+    | 'distortion'
+    | 'offgassing'
+    | 'part-thickness'
+    | 'porosity'
+    | 'wrinkling'
+    | 'tool-compensation'
+  >;
   content?: PortableTextBlock[];
   featured?: boolean;
   order?: number;
