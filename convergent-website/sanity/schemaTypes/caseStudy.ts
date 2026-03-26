@@ -1,8 +1,8 @@
 import { defineType, defineField } from 'sanity';
 
-export const project = defineType({
-  name: 'project',
-  title: 'Project',
+export const caseStudy = defineType({
+  name: 'caseStudy',
+  title: 'Case Study',
   type: 'document',
   fields: [
     defineField({
@@ -27,8 +27,8 @@ export const project = defineType({
       type: 'string',
     }),
     defineField({
-      name: 'description',
-      title: 'Description',
+      name: 'summary',
+      title: 'Summary',
       type: 'text',
       rows: 3,
     }),
@@ -39,12 +39,6 @@ export const project = defineType({
       options: {
         hotspot: true,
       },
-    }),
-    defineField({
-      name: 'gallery',
-      title: 'Gallery',
-      type: 'array',
-      of: [{ type: 'image', options: { hotspot: true } }],
     }),
     defineField({
       name: 'industry',
@@ -81,24 +75,6 @@ export const project = defineType({
           { title: 'Bonding', value: 'bonding' },
         ],
       },
-    }),
-    defineField({
-      name: 'partFamilies',
-      title: 'Part Families',
-      type: 'array',
-      of: [
-        {
-          type: 'reference',
-          to: [{ type: 'partFamily' }],
-          options: {
-            filter: ({ document }) => ({
-              filter: 'defined($process) && $process in processes',
-              params: { process: document?.process },
-            }),
-          },
-        },
-      ],
-      description: 'Options are filtered by the selected process.',
     }),
     defineField({
       name: 'status',
@@ -144,6 +120,28 @@ export const project = defineType({
       },
     }),
     defineField({
+      name: 'deckPdf',
+      title: 'Deck PDF',
+      type: 'file',
+      options: {
+        accept: '.pdf',
+      },
+      description: 'Upload a PDF export of the PowerPoint deck.',
+    }),
+    defineField({
+      name: 'deckPageCount',
+      title: 'Deck Page Count',
+      type: 'number',
+      description: 'Number of pages in the deck PDF (used for the carousel).',
+      validation: (Rule) =>
+        Rule.custom((value, context) => {
+          if (context.document?.deckPdf && (!value || value < 1)) {
+            return 'Deck Page Count is required when a deck PDF is uploaded.';
+          }
+          return true;
+        }),
+    }),
+    defineField({
       name: 'content',
       title: 'Content',
       type: 'array',
@@ -159,7 +157,7 @@ export const project = defineType({
       name: 'order',
       title: 'Order',
       type: 'number',
-      description: 'Order for displaying projects (lower numbers appear first)',
+      description: 'Order for displaying case studies (lower numbers appear first)',
     }),
   ],
   preview: {
@@ -169,7 +167,7 @@ export const project = defineType({
       media: 'mainImage',
     },
     prepare(selection) {
-      const { title, customer } = selection;
+      const { title, customer } = selection as { title?: string; customer?: string };
       return {
         ...selection,
         subtitle: customer ? `Customer: ${customer}` : 'No customer specified',

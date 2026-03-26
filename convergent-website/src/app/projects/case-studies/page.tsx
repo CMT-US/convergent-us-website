@@ -1,24 +1,28 @@
 import Link from 'next/link';
+import { client, sanityEnabled } from '@/lib/sanity/client';
+import { caseStudiesQuery } from '@/lib/sanity/queries';
+import { CaseStudy } from '@/lib/sanity/types';
+import CaseStudiesGrid from '@/components/ui/CaseStudiesGrid';
 
-const caseStudies = [
-  {
-    title: 'Chevron Skin Bond onto Complex Substructure',
-    outcome: 'Heat blanket design for complex structures to predict and prevent overtemping.',
-    link: '/projects',
-  },
-  {
-    title: 'Distortion Prediction for Thin Ply Composite Parts',
-    outcome: 'Content under construction.',
-    link: '/projects',
-  },
-  {
-    title: 'Thermal Management for Autoclave Processes',
-    outcome: 'Content under construction.',
-    link: '/projects',
-  },
-];
+export const revalidate = 60; // Revalidate every 60 seconds
 
-export default function CaseStudiesPage() {
+async function getCaseStudies(): Promise<CaseStudy[]> {
+  if (!sanityEnabled || !client) {
+    return [];
+  }
+
+  try {
+    const caseStudies = await client.fetch<CaseStudy[]>(caseStudiesQuery);
+    return caseStudies;
+  } catch (error) {
+    console.error('Error fetching case studies:', error);
+    return [];
+  }
+}
+
+export default async function CaseStudiesPage() {
+  const caseStudies = await getCaseStudies();
+
   return (
     <div className="min-h-screen">
       <section className="bg-blue-600 text-white py-16">
@@ -32,24 +36,8 @@ export default function CaseStudiesPage() {
       </section>
 
       <section className="py-16 bg-white">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 grid gap-8 md:grid-cols-3">
-          {caseStudies.map((cs) => (
-            <div key={cs.title} className="rounded-lg border border-gray-100 bg-gray-50 p-6 shadow-sm">
-              <h2 className="text-xl font-semibold text-gray-900 mb-2">{cs.title}</h2>
-              <p className="text-gray-600 mb-4">{cs.outcome}</p>
-              {cs.outcome !== 'Content under construction.' && (
-                <Link
-                  href={cs.link}
-                  className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium"
-                >
-                  View details
-                  <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </Link>
-              )}
-            </div>
-          ))}
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+          <CaseStudiesGrid caseStudies={caseStudies} />
         </div>
       </section>
 

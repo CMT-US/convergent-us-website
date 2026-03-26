@@ -23,7 +23,9 @@ export default function Services() {
             {/* R&D Services */}
             <div className="bg-white rounded-lg shadow-sm p-8">
               <h2 className="text-2xl font-bold text-gray-900 mb-6">
-                R&D Services
+                <Link href="/projects/research" className="text-blue-600 hover:text-blue-700">
+                  R&amp;D Services
+                </Link>
               </h2>
               <div className="text-gray-600 space-y-4">
                 <p>
