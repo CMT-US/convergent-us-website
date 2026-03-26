@@ -11,6 +11,7 @@ export const projectsQuery = `*[_type == "project"] | order(order asc, completed
   industry,
   material,
   process,
+  partFamilies[]->{ _id, title, slug },
   status,
   completedDate,
   manufacturingChallenges,
@@ -29,6 +30,7 @@ export const featuredProjectsQuery = `*[_type == "project" && featured == true] 
   industry,
   material,
   process,
+  partFamilies[]->{ _id, title, slug },
   status,
   completedDate,
   manufacturingChallenges,
@@ -48,9 +50,12 @@ export const projectBySlugQuery = `*[_type == "project" && slug.current == $slug
   industry,
   material,
   process,
+  partFamilies[]->{ _id, title, slug },
   status,
   completedDate,
   manufacturingChallenges,
+  deckPdf{asset->{_id, url}},
+  deckPageCount,
   content,
   featured,
   order
@@ -67,9 +72,51 @@ export const projectsByProcessQuery = `*[_type == "project" && process == $proce
   industry,
   material,
   process,
+  partFamilies[]->{ _id, title, slug },
   status,
   completedDate,
   manufacturingChallenges,
+  featured,
+  order
+}`;
+
+// Get all case studies ordered by order field, then by completed date
+export const caseStudiesQuery = `*[_type == "caseStudy"] | order(order asc, completedDate desc) {
+  _id,
+  title,
+  slug,
+  customer,
+  summary,
+  mainImage,
+  industry,
+  material,
+  process,
+  status,
+  completedDate,
+  manufacturingChallenges,
+  featured,
+  order,
+  deckPdf{asset->{_id, url}},
+  deckPageCount
+}`;
+
+// Get a single case study by slug
+export const caseStudyBySlugQuery = `*[_type == "caseStudy" && slug.current == $slug][0] {
+  _id,
+  title,
+  slug,
+  customer,
+  summary,
+  mainImage,
+  industry,
+  material,
+  process,
+  status,
+  completedDate,
+  manufacturingChallenges,
+  deckPdf{asset->{_id, url}},
+  deckPageCount,
+  content,
   featured,
   order
 }`;

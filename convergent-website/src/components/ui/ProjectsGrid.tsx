@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Project } from '@/lib/sanity/types';
@@ -53,33 +53,48 @@ type ProjectsGridProps = {
 };
 type FilterOptions = {
   materials: Array<NonNullable<Project['material']>[number]>;
-  customers: string[];
   processes: Array<NonNullable<Project['process']>>;
   statuses: Array<NonNullable<Project['status']>>;
   challenges: Array<NonNullable<Project['manufacturingChallenges']>[number]>;
+  partFamilies: Array<{ id: string; label: string }>;
 };
 
 export default function ProjectsGrid({ projects }: ProjectsGridProps) {
   const [selectedMaterials, setSelectedMaterials] = useState<
     Array<NonNullable<Project['material']>[number]>
   >([]);
-  const [selectedCustomer, setSelectedCustomer] = useState('all');
   const [selectedProcess, setSelectedProcess] = useState('all');
+  const [selectedPartFamily, setSelectedPartFamily] = useState('all');
   const [selectedStatus, setSelectedStatus] = useState('all');
   const [selectedChallenges, setSelectedChallenges] = useState<
     Array<NonNullable<Project['manufacturingChallenges']>[number]>
   >([]);
 
   const options = useMemo<FilterOptions>(() => {
-    const materials = Array.from(
-      new Set(projects.flatMap((project) => getMaterialList(project.material)))
-    ).sort((a, b) => getLabel(a, materialLabels).localeCompare(getLabel(b, materialLabels)));
-    const customers = Array.from(
-      new Set(projects.map((project) => project.customer).filter(Boolean) as string[])
-    ).sort((a, b) => a.localeCompare(b));
+    const materials = (Object.keys(materialLabels) as Array<
+      NonNullable<Project['material']>[number]
+    >).sort((a, b) => getLabel(a, materialLabels).localeCompare(getLabel(b, materialLabels)));
     const processes = Array.from(
       new Set(projects.map((project) => project.process).filter(Boolean) as Array<NonNullable<Project['process']>>)
     ).sort((a, b) => getLabel(a, processLabels).localeCompare(getLabel(b, processLabels)));
+    const partFamilies =
+      selectedProcess === 'all'
+        ? []
+        : Array.from(
+            new Map(
+              projects
+                .filter((project) => project.process === selectedProcess)
+                .flatMap((project) => project.partFamilies || [])
+                .filter((family) => family && family._id)
+                .map((family) => [
+                  family._id,
+                  {
+                    id: family._id,
+                    label: family.title || family.slug?.current || family._id,
+                  },
+                ])
+            ).values()
+          ).sort((a, b) => a.label.localeCompare(b.label));
     const statuses = Array.from(
       new Set(projects.map((project) => project.status).filter(Boolean) as Array<NonNullable<Project['status']>>)
     ).sort((a, b) => getLabel(a, statusLabels).localeCompare(getLabel(b, statusLabels)));
@@ -89,12 +104,25 @@ export default function ProjectsGrid({ projects }: ProjectsGridProps) {
 
     return {
       materials,
-      customers,
       processes,
+      partFamilies,
       statuses,
       challenges,
     };
-  }, [projects]);
+  }, [projects, selectedProcess]);
+
+  useEffect(() => {
+    if (selectedProcess === 'all') {
+      setSelectedPartFamily('all');
+      return;
+    }
+    if (
+      selectedPartFamily !== 'all' &&
+      !options.partFamilies.some((family) => family.id === selectedPartFamily)
+    ) {
+      setSelectedPartFamily('all');
+    }
+  }, [options.partFamilies, selectedPartFamily, selectedProcess]);
 
   const filteredProjects = useMemo(
     () =>
@@ -108,11 +136,15 @@ export default function ProjectsGrid({ projects }: ProjectsGridProps) {
             return false;
           }
         }
-        if (selectedCustomer !== 'all' && project.customer !== selectedCustomer) {
-          return false;
-        }
         if (selectedProcess !== 'all' && project.process !== selectedProcess) {
           return false;
+        }
+        if (selectedPartFamily !== 'all') {
+          const projectFamilies = project.partFamilies || [];
+          const matches = projectFamilies.some((family) => family._id === selectedPartFamily);
+          if (!matches) {
+            return false;
+          }
         }
         if (selectedStatus !== 'all' && project.status !== selectedStatus) {
           return false;
@@ -131,8 +163,8 @@ export default function ProjectsGrid({ projects }: ProjectsGridProps) {
     [
       projects,
       selectedMaterials,
-      selectedCustomer,
       selectedProcess,
+      selectedPartFamily,
       selectedStatus,
       selectedChallenges,
     ]
@@ -140,8 +172,8 @@ export default function ProjectsGrid({ projects }: ProjectsGridProps) {
 
   const hasActiveFilters =
     selectedMaterials.length > 0 ||
-    selectedCustomer !== 'all' ||
     selectedProcess !== 'all' ||
+    selectedPartFamily !== 'all' ||
     selectedStatus !== 'all' ||
     selectedChallenges.length > 0;
 
@@ -159,8 +191,8 @@ export default function ProjectsGrid({ projects }: ProjectsGridProps) {
 
   const clearFilters = () => {
     setSelectedMaterials([]);
-    setSelectedCustomer('all');
     setSelectedProcess('all');
+    setSelectedPartFamily('all');
     setSelectedStatus('all');
     setSelectedChallenges([]);
   };
@@ -169,24 +201,6 @@ export default function ProjectsGrid({ projects }: ProjectsGridProps) {
     <div>
       <div className="mb-8 rounded-lg border border-gray-200 bg-white p-4 shadow-sm">
         <div className="grid gap-4 md:grid-cols-3 lg:grid-cols-3">
-          <div>
-            <label htmlFor="filter-customer" className="block text-sm font-medium text-gray-700 mb-1">
-              Customer
-            </label>
-            <select
-              id="filter-customer"
-              value={selectedCustomer}
-              onChange={(event) => setSelectedCustomer(event.target.value)}
-              className="w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
-            >
-              <option value="all">All customers</option>
-              {options.customers.map((customer) => (
-                <option key={customer} value={customer}>
-                  {customer}
-                </option>
-              ))}
-            </select>
-          </div>
           <div>
             <label htmlFor="filter-process" className="block text-sm font-medium text-gray-700 mb-1">
               Process
@@ -201,6 +215,27 @@ export default function ProjectsGrid({ projects }: ProjectsGridProps) {
               {options.processes.map((process) => (
                 <option key={process} value={process}>
                   {getLabel(process, processLabels)}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div>
+            <label htmlFor="filter-part-family" className="block text-sm font-medium text-gray-700 mb-1">
+              Part Family
+            </label>
+            <select
+              id="filter-part-family"
+              value={selectedPartFamily}
+              onChange={(event) => setSelectedPartFamily(event.target.value)}
+              disabled={selectedProcess === 'all'}
+              className="w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+            >
+              <option value="all">
+                {selectedProcess === 'all' ? 'Select a process first' : 'All part families'}
+              </option>
+              {options.partFamilies.map((family) => (
+                <option key={family.id} value={family.id}>
+                  {family.label}
                 </option>
               ))}
             </select>
@@ -355,21 +390,20 @@ export default function ProjectsGrid({ projects }: ProjectsGridProps) {
                         {getLabel(material, materialLabels)}
                       </span>
                     ))}
-                  {project.industry && (
-                    <span className="inline-block rounded-full bg-gray-100 px-3 py-1 text-sm text-gray-700">
-                      {project.industry}
-                    </span>
-                  )}
                 </div>
 
                 {project.manufacturingChallenges &&
                   project.manufacturingChallenges.length > 0 && (
-                    <p className="mt-2 text-sm text-gray-500">
-                      Challenges:{' '}
-                      {project.manufacturingChallenges
-                        .map((challenge) => getLabel(challenge, challengeLabels))
-                        .join(', ')}
-                    </p>
+                    <div className="mt-2 flex flex-wrap gap-2">
+                      {project.manufacturingChallenges.map((challenge) => (
+                        <span
+                          key={challenge}
+                          className="inline-block rounded-full bg-orange-100 px-3 py-1 text-sm text-orange-700"
+                        >
+                          {getLabel(challenge, challengeLabels)}
+                        </span>
+                      ))}
+                    </div>
                   )}
 
                 {project.completedDate && (

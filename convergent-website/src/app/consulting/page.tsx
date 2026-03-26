@@ -30,7 +30,11 @@ export default function Consulting() {
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {processes.map((process) => (
-              <div key={process.id} id={process.id} className="bg-white rounded-lg shadow-sm p-8">
+              <div
+                key={process.id}
+                id={process.id}
+                className="scroll-mt-24 bg-white rounded-lg shadow-sm p-8"
+              >
                 <h3 className="text-xl font-semibold text-gray-900 mb-4">
                   {process.title}
                 </h3>
