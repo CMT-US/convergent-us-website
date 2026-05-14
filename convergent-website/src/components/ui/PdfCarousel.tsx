@@ -29,6 +29,7 @@ export default function PdfCarousel({ pdfUrl, pageCount }: PdfCarouselProps) {
   const [isLoading, setIsLoading] = useState(true);
 
   const resolvedPdfUrl = pdfUrl || DEFAULT_PDF_PATH;
+  const normalizedPdfUrl = encodeURI(resolvedPdfUrl);
   const resolvedCount = pageCount && pageCount > 0
     ? pageCount
     : numPages || DEFAULT_PAGE_COUNT;
@@ -69,7 +70,7 @@ export default function PdfCarousel({ pdfUrl, pageCount }: PdfCarouselProps) {
     setLoadError(null);
     setIsLoading(true);
 
-    const loadingTask = getDocument(resolvedPdfUrl);
+    const loadingTask = getDocument(normalizedPdfUrl);
     loadingTask.promise
       .then((doc) => {
         if (!isActive) {
@@ -94,7 +95,7 @@ export default function PdfCarousel({ pdfUrl, pageCount }: PdfCarouselProps) {
       isActive = false;
       loadingTask.destroy();
     };
-  }, [resolvedPdfUrl]);
+  }, [normalizedPdfUrl]);
 
   useEffect(() => {
     const renderPage = async () => {
@@ -143,12 +144,27 @@ export default function PdfCarousel({ pdfUrl, pageCount }: PdfCarouselProps) {
         )}
 
         {!isLoading && loadError && (
-          <div className="p-4 text-gray-600">
-            PDF preview unavailable.{' '}
-            <a href={resolvedPdfUrl} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-700">
-              Open in a new tab
-            </a>
-            .
+          <div className="p-4 text-gray-600 space-y-4">
+            <p>
+              PDF preview unavailable.{' '}
+              <a href={normalizedPdfUrl} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-700">
+                Open in a new tab
+              </a>
+              .
+            </p>
+            <object
+              data={normalizedPdfUrl}
+              type="application/pdf"
+              className="min-h-[70vh] w-full rounded-md border border-gray-200"
+            >
+              <p>
+                Your browser could not display this PDF inline.{' '}
+                <a href={normalizedPdfUrl} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-700">
+                  Download the PDF
+                </a>
+                .
+              </p>
+            </object>
           </div>
         )}
 

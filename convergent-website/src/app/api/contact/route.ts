@@ -1,10 +1,10 @@
 import { NextResponse } from 'next/server';
-import { client } from '@/lib/sanity/client';
+import { writeClient } from '@/lib/sanity/writeClient';
 import { ContactSubmission } from '@/lib/sanity/types';
 
 export async function POST(request: Request) {
   try {
-    if (!client) {
+    if (!writeClient) {
       return NextResponse.json(
         { error: 'Contact form is temporarily unavailable. Please try again later.' },
         { status: 503 }
@@ -41,7 +41,7 @@ export async function POST(request: Request) {
     };
 
     // Store in Sanity
-    const result = await client.create({
+    const result = await writeClient.create({
       _type: 'contactSubmission',
       ...submission,
     });
